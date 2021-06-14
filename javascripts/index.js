@@ -3,6 +3,7 @@ const button = () => document.getElementById("button")
 const ulDiv = () => document.getElementById("list")
 const ul = () => document.getElementById("posts-list")
 const createPostForm = () => document.getElementById("create-post-form") 
+const endPoint = ("http://localhost:3000/posts")
 
 document.addEventListener("DOMContentLoaded", () => {
     button().addEventListener("click", handleClick)
@@ -10,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 
 const handleClick = () => {
-    fetch("http://localhost:3000/posts")
+    fetch(endPoint)
     .then(resp => resp.json())
     .then(json => renderPosts(json))
     .catch(err => console.log(err))
@@ -43,6 +44,28 @@ function createFormHandler(e) {
     const websiteInput = document.getElementById("input-website").value
     const descriptionInput = document.getElementById("input-description").value
     const categoryInput = document.getElementById("categories").value
+    const categoryId = parseInt(categoryInput)
+    postFetch(brandInput, imageInput, sizeInput, priceInput, websiteInput, descriptionInput, categoryId)
+}
+
+function postFetch(brand,image_url, size, price, website, description, category_id) {
+ fetch(endPoint, {
+     method: "POST",
+     headers: {"Content-Type": "application/json"},
+     body: JSON.stringify({
+           brand: brand,
+           image_url: image_url, 
+           size: size, 
+           price: price, 
+           website: website, 
+           description: description,
+           category_id: category_id
+     })
+ })
+ .then(resp => resp.json())
+ .then(post => {
+ console.log(post);
+ })
 }
 
 
