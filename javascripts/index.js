@@ -2,9 +2,11 @@ const buttonDiv = () => document.getElementById("button-control")
 const button = () => document.getElementById("button")
 const ulDiv = () => document.getElementById("list")
 const ul = () => document.getElementById("posts-list")
+const createPostForm = () => document.getElementById("create-post-form") 
 
 document.addEventListener("DOMContentLoaded", () => {
     button().addEventListener("click", handleClick)
+    createPostForm().addEventListener("submit", (e) => createFormHandler(e))
 })
 
 const handleClick = () => {
@@ -31,4 +33,16 @@ const renderPosts = (posts) => {
  ul().appendChild(li)
  });
 }
+
+function createFormHandler(e) {
+    e.preventDefault()
+    const brandInput = document.getElementById("input-brand").value
+    const imageInput = document.getElementById("input-url").value
+    const sizeInput = document.getElementById("input-size").value
+    const priceInput = document.getElementById("input-price").value
+    const websiteInput = document.getElementById("input-website").value
+    const descriptionInput = document.getElementById("input-description").value
+    const categoryInput = document.getElementById("categories").value
+}
+
 
