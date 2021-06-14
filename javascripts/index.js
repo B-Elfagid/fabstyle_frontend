@@ -48,24 +48,19 @@ function createFormHandler(e) {
     postFetch(brandInput, imageInput, sizeInput, priceInput, websiteInput, descriptionInput, categoryId)
 }
 
-function postFetch(brand,image_url, size, price, website, description, category_id) {
+function postFetch(brand, image_url, size, price, website, description, category_id) {
+ const bodyData = {brand, image_url, size, price, website, description, category_id}
  fetch(endPoint, {
      method: "POST",
      headers: {"Content-Type": "application/json"},
-     body: JSON.stringify({
-           brand: brand,
-           image_url: image_url, 
-           size: size, 
-           price: price, 
-           website: website, 
-           description: description,
-           category_id: category_id
-     })
+     body: JSON.stringify(bodyData)
  })
  .then(resp => resp.json())
  .then(post => {
  console.log(post);
  })
+ .catch(err => console.log(err))
 }
+
 
 
