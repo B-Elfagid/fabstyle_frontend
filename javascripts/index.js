@@ -4,19 +4,16 @@ const ulDiv = () => document.getElementById("list")
 const ul = () => document.getElementById("posts-list")
 const createPostForm = () => document.getElementById("create-post-form") 
 const endPoint = ("http://localhost:3000/posts")
-
 document.addEventListener("DOMContentLoaded", () => {
     button().addEventListener("click", handleClick)
     createPostForm().addEventListener("submit", (e) => createFormHandler(e))
 })
-
 const handleClick = () => {
     fetch(endPoint)
     .then(resp => resp.json())
     .then(json => renderPosts(json))
     .catch(err => console.log(err))
 }
-
 const renderPosts = (posts) => {
  posts.forEach(element => {
  const li = document.createElement("li")
@@ -34,11 +31,10 @@ const renderPosts = (posts) => {
  ul().appendChild(li)
  });
 }
-
 function createFormHandler(e) {
     e.preventDefault()
     const brandInput = document.getElementById("input-brand").value
-    const imageInput = document.getElementById("input-url").value
+    const imageInput = document.getElementById("input-image").value
     const sizeInput = document.getElementById("input-size").value
     const priceInput = document.getElementById("input-price").value
     const websiteInput = document.getElementById("input-website").value
@@ -47,9 +43,8 @@ function createFormHandler(e) {
     const categoryId = parseInt(categoryInput)
     postFetch(brandInput, imageInput, sizeInput, priceInput, websiteInput, descriptionInput, categoryId)
 }
-
-function postFetch(brand, image_url, size, price, website, description, category_id) {
- const bodyData = {brand, image_url, size, price, website, description, category_id}
+function postFetch(brand, image, size, price, website, description, category_id) {
+ const bodyData = {brand, image, size, price, website, description, category_id}
  fetch(endPoint, {
      method: "POST",
      headers: {"Content-Type": "application/json"},
@@ -57,10 +52,8 @@ function postFetch(brand, image_url, size, price, website, description, category
  })
  .then(resp => resp.json())
  .then(post => {
+     debugger
  console.log(post);
  })
  .catch(err => console.log(err))
 }
-
-
-
