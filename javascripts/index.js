@@ -5,37 +5,35 @@ const ul = () => document.getElementById("posts-list")
 const createPostForm = () => document.getElementById("create-post-form") 
 const endPoint = ("http://localhost:3000/posts")
 document.addEventListener("DOMContentLoaded", () => {
+    fetchCategories()
     button().addEventListener("click", handleClick)
     createPostForm().addEventListener("submit", (e) => createFormHandler(e))
 })
+const fetchCategories = () => {
+  fetch("http://localhost:3000/categories")
+  .then(resp => resp.json())
+  .then(json => {
+    json.forEach(categoryData => {
+     new Category(categoryData)
+    })
+  })
+}
 const handleClick = () => {
     if (ul().children.length < 1){
     fetch(endPoint)
     .then(resp => resp.json())
-    .then(json => renderPosts(json))
+    .then(json => {
+        json.forEach(postData => {
+          let post = new Post(postData)
+          post.renderPost()
+        })
+    })
     .catch(err => console.log(err))
 } else {
 ul().innerHTML = ""
  }
 }
 
-const renderPosts = (posts) => {
- posts.forEach(element => {
- const li = document.createElement("li")
- li.innerHTML = `
-    <h2 class="post-category">${element.category.name}</h2>
-    <h2 class="post-brand">${element.brand}</h2>
-    <h2 class="post-image_url">
-        <img src=${element.image_url} height="200" width="250"></h2>
-    <h2 class="post-size">${element.size}</h2>
-    <p class="post-description">${element.description}</p>
-    <h4 class="post-price">${element.price}</h4>
-    <h2 class="post-website">${element.website}</h2>
-    <button data-id=${posts.id}>edit</button>
- `
- ul().appendChild(li)
- });
-}
 function createFormHandler(e) {
     e.preventDefault()
     const brandInput = document.getElementById("input-brand").value
@@ -57,9 +55,8 @@ function postFetch(brand, image, size, price, website, description, category_id)
  })
  .then(resp => resp.json())
  .then(post => {
-     debugger
  console.log(post);
- const renderPosts = posts
+ const renderPosts = post
     const li = document.createElement("li")
     li.innerHTML = `
        <h2 class="post-category">${element.category.name}</h2>
@@ -70,7 +67,8 @@ function postFetch(brand, image, size, price, website, description, category_id)
        <p class="post-description">${element.description}</p>
        <h4 class="post-price">${element.price}</h4>
        <h2 class="post-website">${element.website}</h2>
-       <button data-id=${posts.id}>edit</button>
+       <button class="edit-post" data-id="${posts.id}">edit</button> 
+       <button class="delete-post" data-id="${posts.id}">delete</button> 
     `
     ul().appendChild(li)   
  })
