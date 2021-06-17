@@ -4,4 +4,8 @@
 [x] intialize git repo
 [x] connect api to frontend
      add event listener and manupulateb the DOM 
-     create a form 
+[x] create a form
+[x] create a new branch for oojs to refactor the code and add class
+[x] Link to the new JS file in index.html by adding script for post and test that in browser console 
+[x] create constructor with all its attributes 
+
