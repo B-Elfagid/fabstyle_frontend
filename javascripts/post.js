@@ -32,7 +32,6 @@ class Post {
           <h5 class="post-website">${this.website}</h5>
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
-                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                 <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
               </div>
               <small class="text-muted">Category: ${this.category.name}</small>

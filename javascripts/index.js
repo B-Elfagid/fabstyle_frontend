@@ -67,8 +67,8 @@ function postFetch(brand, image, size, price, website, description, category_id)
        <p class="post-description">${element.description}</p>
        <h4 class="post-price">${element.price}</h4>
        <h2 class="post-website">${element.website}</h2>
-       <button class="edit-post" data-id="${posts.id}">edit</button> 
-       <button class="delete-post" data-id="${posts.id}">delete</button> 
+       <button class="delete-post" data-id="${posts.id}">Delete</button>
+        document.querySelector("")
     `
     ul().appendChild(li)   
  })
