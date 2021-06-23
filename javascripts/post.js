@@ -12,14 +12,14 @@ class Post {
         this.category = category
         Post.all.push(this)
     }
-
+    
     findCategoryById() {
      return Category.all.find(category => category.id === this.category_id)
     }
+    
     renderPost() {
         const li = document.createElement("li")
         li.innerHTML = `
-
         <div class="col-md-4">
         <div class="card mb-4 shadow-sm">
         <img src=${this.image} class="post-img-top" alt="...">
@@ -39,6 +39,8 @@ class Post {
           </div>
         </div>
       </div>`
+      
+      
       
 
            //<h2 class="post-category">${this.findCategoryById().name}</h2>

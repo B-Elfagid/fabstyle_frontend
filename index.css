@@ -22,6 +22,19 @@
   .jumbotron .container {
     max-width: 40rem;
   }
+ .post-body {
+   background-color: silver;
+   
+   display: inline-block;
+   }
+   
+ #button-control {
+   background-color: silver;
+   border-style: solid;
+    text-align: center;
+ }
+
+
   
   footer {
     padding-top: 3rem;
