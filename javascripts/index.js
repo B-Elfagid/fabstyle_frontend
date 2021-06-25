@@ -79,9 +79,7 @@ function postFetch(formData) {
        <h2 class="post-size">${post.size}</h2>
        <p class="post-description">${post.description}</p>
        <h4 class="post-price">${post.price}</h4>
-       <h2 class="post-website">${post.website}</h2>
-       <button class="delete-post" data-id="${post.id}">Delete</button>
-        
+       <h2 class="post-website">${post.website}</h2>    
     `
     ul().appendChild(li)  
     const img = getImageFromBackEnd(post.image.url)

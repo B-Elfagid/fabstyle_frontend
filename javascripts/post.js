@@ -20,10 +20,9 @@ class Post {
     renderPost() {
         const li = document.createElement("li")
         li.innerHTML = `
-        <div class="col-md-4">
-        <div class="card mb-4 shadow-sm">
-        <img src=${this.image} class="post-img-top" alt="...">
+       
           <div class="post-body">
+          <img src=${this.image} class="post-img-top" alt="...">
           <h2 class="post-category">${this.findCategoryById().name}</h2>
           <h5 class="post-brand">${this.brand}</h5>
           <h5 class="post-size">size-${this.size}</h5>
@@ -33,12 +32,13 @@ class Post {
           <button class="delete-post" data-id="${this.id}">Delete</button>
               <small class="text-muted">Category: ${this.category.name}</small>
             </div>
-          </div>
-        </div>
+        
       </div>`
      
       const deleteBtn = li.querySelector(".delete-post")
       deleteBtn.addEventListener('click', deletePost)
+      //li.addEventListener('click', handlePostClick)
+     
 
       
 
@@ -60,10 +60,15 @@ class Post {
        
 }
 
+//function handlePostClick(e) {
+  //if (e.target.innerText === "Delete") {
+    //deletePost(e)
+  //}
+//}
+
 function deletePost(e) {
   const id = e.target.dataset.id 
   e.target.parentElement.remove()
-
   fetch(endPoint + "/" + id, {
     method: "DELETE",
    //headers: {"Content-Type": "application/json"},
