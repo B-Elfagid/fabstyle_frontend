@@ -30,17 +30,16 @@ class Post {
           <h5 class="post-price">£${this.price}</h5>
           <p class="post-description">${this.description}</p>
           <h5 class="post-website">${this.website}</h5>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
-              </div>
+          <button class="delete-post" data-id="${this.id}">Delete</button>
               <small class="text-muted">Category: ${this.category.name}</small>
             </div>
           </div>
         </div>
       </div>`
-      
-      
+     
+      const deleteBtn = li.querySelector(".delete-post")
+      deleteBtn.addEventListener('click', deletePost)
+
       
 
            //<h2 class="post-category">${this.findCategoryById().name}</h2>
@@ -54,7 +53,24 @@ class Post {
           // <button class="edit-post" data-id="${this.id}">edit</button> 
           // <button class="delete-post" data-id="${this.id}">delete</button> 
        // `
+      
         ul().appendChild(li)
-       }
+       
+      }
        
 }
+
+function deletePost(e) {
+  const id = e.target.dataset.id 
+  e.target.parentElement.remove()
+
+  fetch(endPoint + "/" + id, {
+    method: "DELETE",
+   //headers: {"Content-Type": "application/json"},
+  })
+  .then(resp => resp.json())
+  .then(post => {
+   alert(post.message)
+  })
+
+ }

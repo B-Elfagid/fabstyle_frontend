@@ -46,7 +46,10 @@ function createFormHandler(e) {
     // const categoryId = parseInt(categoryInput)
     const formData = new FormData(e.target)
     postFetch(formData)
+
+    createPostForm().reset()
 }
+
 
 function getImageFromBackEnd(url){
    fetch(`http://localhost:3000${url}`)
@@ -54,7 +57,6 @@ function getImageFromBackEnd(url){
   .then(blob => {
     const img  = document.createElement("img")
       img.src = URL.createObjectURL(blob)
-      debugger
       document.querySelector(".post-image_url").append(img)
 })
 }
@@ -87,3 +89,6 @@ function postFetch(formData) {
     
  })
 }
+
+
+
