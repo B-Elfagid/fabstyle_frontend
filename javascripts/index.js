@@ -14,21 +14,30 @@ const fetchCategories = () => {
   .then(resp => resp.json())
   .then(json => {
     json.forEach(categoryData => {
-     new Category(categoryData)
+    new Category(categoryData)
+     categoryData.posts.forEach(postData => {
+       new Post(postData)
+     })
+
     })
   })
+
 }
+
 const handleClick = () => {
     if (ul().children.length < 1){
-    fetch(endPoint)
-    .then(resp => resp.json())
-    .then(json => {
-        json.forEach(postData => {
-          let post = new Post(postData)
+    // fetch(endPoint)
+    // .then(resp => resp.json())
+    // .then(json => {
+       Post.all.forEach(post => {
+        const div = document.querySelector(`#post-${post.id} .post-img-top`)
+          getImageFromBackEnd(post.image.url, div)
+           //fetch the image for each post 
+          //let post = new Post(postData)
           post.renderPost()
         })
-    })
-    .catch(err => console.log(err))
+    //})
+    //.catch(err => console.log(err))
 } else {
 ul().innerHTML = ""
  }
@@ -44,20 +53,19 @@ function createFormHandler(e) {
     // const descriptionInput = document.getElementById("input-description").value
     // const categoryInput = document.getElementById("categories").value
     // const categoryId = parseInt(categoryInput)
+   
     const formData = new FormData(e.target)
     postFetch(formData)
-
     createPostForm().reset()
 }
 
-
-function getImageFromBackEnd(url){
+function getImageFromBackEnd(url, div){
    fetch(`http://localhost:3000${url}`)
   .then(resp => resp.blob())
   .then(blob => {
     const img  = document.createElement("img")
       img.src = URL.createObjectURL(blob)
-      document.querySelector(".post-image_url").append(img)
+      div.append(img)
 })
 }
 
@@ -70,23 +78,28 @@ function postFetch(formData) {
  })
  .then(resp => resp.json())
  .then(post => {
-
-    const li = document.createElement("li")
-    li.innerHTML = `
-       <h2 class="post-category">${post.category.name}</h2>
-       <h2 class="post-brand">${post.brand}</h2>
-       <h2 class="post-image_url"></h2>
-       <h2 class="post-size">${post.size}</h2>
-       <p class="post-description">${post.description}</p>
-       <h4 class="post-price">${post.price}</h4>
-       <h2 class="post-website">${post.website}</h2>    
-    `
-    ul().appendChild(li)  
-    const img = getImageFromBackEnd(post.image.url)
-    
-    
- })
+const p = new Post(post)
+p.renderPost()
+    //const li = document.createElement("li")
+    // li.id = `post-${post.id}`
+    // li.innerHTML = `
+    //    <h2 class="post-category">${post.category.name}</h2>
+    //    <h2 class="post-brand">${post.brand}</h2>
+    //    <h2 class="post-image_url"></h2>
+    //    <h2 class="post-size">${post.size}</h2>
+    //    <p class="post-description">${post.description}</p>
+    //    <h4 class="post-price">${post.price}</h4>
+    //    <h2 class="post-website">${post.website}</h2>    
+    // `
+    //ul().appendChild(li)  
+    const div = document.querySelector(`#post-${post.id} .post-img-top`)
+    debugger
+     getImageFromBackEnd(p.image.url, div)
+   
+    })
+ 
 }
+
 
 
 

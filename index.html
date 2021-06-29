@@ -55,9 +55,9 @@
         <div class="col-sm-4 offset-md-1 py-4">
           <h4 class="text-white">Contact</h4>
           <ul class="list-unstyled">
-            <li><a href="#" class="text-white">Follow on Twitter</a></li>
-            <li><a href="#" class="text-white">Like on Facebook</a></li>
-            <li><a href="#" class="text-white">Email me</a></li>
+            <h6><a href="#" class="text-white">Follow on Twitter</a></h6>
+            <h6><a href="#" class="text-white">Like on Facebook</a></h6>
+            <h6><a href="#" class="text-white">Email me</a></h6>
           </ul>
         </div>
       </div>
@@ -86,22 +86,22 @@
       <form id="create-post-form">
         <h3>Create a form</h3>
         <label for="brand">Brand</label>
-        <input id="input-brand" type="text" name="brand" value="" placeholder="Enter Brand Name" class="input-text">
+        <input id="input-brand" type="text" name="brand" value="" placeholder="Enter Brand Name" class="input-text" required>
         <br><br>
         <label for="image">Image</label>
-        <input id="input-image" type="file" name="image" value="" placeholder="Enter Your Image" class="input-file">
+        <input id="input-image" type="file" name="image" value="" placeholder="Enter Your Image" class="input-file" required>
         <br><br>
         <label for="size">Size</label>
-        <input id="input-size" type="text" name="size" value="" placeholder="Enter Size" class="input-text">
+        <input id="input-size" type="text" name="size" value="" placeholder="Enter Size" class="input-text" required>
         <br><br>
         <label for="price">Price</label>
-        <input id="input-price" type="text" name="price" value="" placeholder="Enter price" class="input-text">
+        <input id="input-price" type="text" name="price" value="" placeholder="Enter price" class="input-text" required>
         <br><br>
         <label for="website">Website</label>
-        <input id="input-website" type="text" name="website" value="" placeholder="Enter Website" class="input-text">
+        <input id="input-website" type="text" name="website" value="" placeholder="Enter Website" class="input-text" required>
         <br><br>
         <label for="description">Description</label>
-        <textarea id="input-description" type="description" name="description" value="" placeholder="Enter description"></textarea>
+        <textarea id="input-description" type="description" name="description" value="" placeholder="Enter description" required></textarea>
         <br><br>
 
         <label for="accessories">Select a Category:</label><br>
@@ -121,6 +121,12 @@
   <div class="album py-5 bg-light bg-light shadow-sm">
       <button id="button">Show Posts</button>
        </div>
+       <label for="categories">Choose a Category:</label>
+          <select name="category" id="category-dropdown">
+          <option value="clothing">Clothing</option>
+          <option value="shoes">Shoes</option>
+          <option value="accessories">Accessories</option>
+       </select>
          <div id="list">
           <ul id="posts-list">
         </ul>   

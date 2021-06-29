@@ -19,16 +19,17 @@ class Post {
     
     renderPost() {
         const li = document.createElement("li")
+        li.id = `post-${this.id}`
         li.innerHTML = `
        
           <div class="post-body">
           <img src=${this.image} class="post-img-top" alt="...">
           <h2 class="post-category">${this.findCategoryById().name}</h2>
-          <h5 class="post-brand">${this.brand}</h5>
+          <h5 class="post-brand">Brand-${this.brand}</h5>
           <h5 class="post-size">size-${this.size}</h5>
           <h5 class="post-price">£${this.price}</h5>
-          <p class="post-description">${this.description}</p>
-          <h5 class="post-website">${this.website}</h5>
+          <p class="post-description">Description-${this.description}</p>
+          <a href= ${this.website} target="_blank">Go to Main Website</a> <br>
           <button class="delete-post" data-id="${this.id}">Delete</button>
               <small class="text-muted">Category: ${this.category.name}</small>
             </div>
