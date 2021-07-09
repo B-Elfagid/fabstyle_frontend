@@ -3,18 +3,31 @@ const button = () => document.getElementById("button")
 const ulDiv = () => document.getElementById("list")
 const ul = () => document.getElementById("posts-list")
 const createPostForm = () => document.getElementById("create-post-form") 
+const firstOption = document.getElementById("category_id_first_option")
+const categorySelect = () => document.getElementById("categories")
 const endPoint = ("http://localhost:3000/posts")
+
 document.addEventListener("DOMContentLoaded", () => {
     fetchCategories()
     button().addEventListener("click", handleClick)
     createPostForm().addEventListener("submit", (e) => createFormHandler(e))
 })
+
+function makeCategoryOptions() {
+  options = Category.all.map(cat => `<option value = ${cat.id}>${cat.name}</option>`)
+  firstOption.append(options)
+}
+
 const fetchCategories = () => {
   fetch("http://localhost:3000/categories")
   .then(resp => resp.json())
   .then(json => {
     json.forEach(categoryData => {
-    new Category(categoryData)
+    const cat = new Category(categoryData)
+    const option = document.createElement("option")
+    option.innerText = cat.name
+    option.value = cat.id
+    categorySelect().appendChild(option)
      categoryData.posts.forEach(postData => {
        new Post(postData)
      })
@@ -22,16 +35,21 @@ const fetchCategories = () => {
   })
 }
 const handleClick = () => {
+    const posts = Post.all.sort(function (a, b) {
+      return (a.price <= b.price ?  -1 :  1)
+    })     
     if (ul().children.length < 1){
-       Post.all.forEach(post => {
+        Post.all.forEach(post => {
            post.renderPost() //first put the post card on the page
-            const div = document.querySelector(`#post-${post.id} .post-body`) //then target the right div, specifically the body of the post card
+            const div = document.querySelector(`#post-${post.id} .post-body`) //then target the right div
             getImageFromBackEnd(post.image.url, div) //fire the fetch call to get the post's image
         })
     } else {
         ul().innerHTML = ""
     }
 }
+
+
 function createFormHandler(e) {
     e.preventDefault()
     const formData = new FormData(e.target)
@@ -44,7 +62,7 @@ function getImageFromBackEnd(url, div){
     .then(blob => {
         const img  = document.createElement("img")
         img.src = URL.createObjectURL(blob)
-        div.insertAdjacentElement('afterbegin', img) //insert the img as the first child inside the post body - check out insertAdjacentElement here https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentElement
+        div.insertAdjacentElement('afterbegin', img) 
     })
 }
 function postFetch(formData) {
@@ -54,9 +72,11 @@ function postFetch(formData) {
     })
     .then(resp => resp.json())
     .then(post => {
+        console.log(post)
         const p = new Post(post)
         p.renderPost() 
         const div = document.querySelector(`#post-${post.id} .post-body`)
         getImageFromBackEnd(p.image.url, div)
     })
 }
+
