@@ -17,14 +17,14 @@ class Post {
      return Category.all.find(category => category.id === this.category_id)
     }
     
+    
     renderPost() {
         const li = document.createElement("li")
         li.id = `post-${this.id}`
         li.innerHTML = `
        
           <div class="post-body">
-          <img src=${this.image} class="post-img-top" alt="...">
-          <h2 class="post-category">${this.findCategoryById().name}</h2>
+          <!-- <h2 class="post-category">${this.findCategoryById().name}</h2> -->
           <h5 class="post-brand">Brand-${this.brand}</h5>
           <h5 class="post-size">size-${this.size}</h5>
           <h5 class="post-price">£${this.price}</h5>
@@ -38,6 +38,8 @@ class Post {
      
       const deleteBtn = li.querySelector(".delete-post")
       deleteBtn.addEventListener('click', deletePost)
+
+
       //li.addEventListener('click', handlePostClick)
      
 

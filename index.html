@@ -83,7 +83,7 @@
      
     <div id="button-control">
 
-      <form id="create-post-form">
+      <form id="create-post-form" enctype="multipart/form-data">
         <h3>Create a form</h3>
         <label for="brand">Brand</label>
         <input id="input-brand" type="text" name="brand" value="" placeholder="Enter Brand Name" class="input-text" required>
@@ -105,11 +105,12 @@
         <br><br>
 
         <label for="accessories">Select a Category:</label><br>
-        <select id="categories" name="categories">
-          <option value="0"></option>
-          <option value="1">Clothing</option>
+        <select id="categories" name="category_id">
+          <option id= "category_id_first_option" value="0"></option>
+
+          <!-- <option value="1">Clothing</option>
           <option value="2">Shoe</option>
-          <option value="3">Accessories</option>
+          <option value="3">Accessories</option> -->
           </select>
           <br><br>
 
